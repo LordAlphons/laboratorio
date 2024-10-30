@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Buscar Laboratorios</title>
+    <style>
+        table {
+            border: 8px outset;
+            border-radius: 10px;
+            border-spacing: 10px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        .alert {
+            text-align: center;
+            margin: 20px 0;
+            color: red; /* Cambia el color si es necesario */
+        }
+    </style>
+</head>
+<body>
+    <h2>Información de Laboratorios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+                <th>País</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for laboratorio in laboratorios %}
+            <tr>
+                <td>{{ laboratorio.nombre }}</td>
+                <td>{{ laboratorio.ciudad }}</td>
+                <td>{{ laboratorio.pais }}</td>
+                <td>
+                    <a href="{% url 'editar-lab' laboratorio.pk %}" class="btn btn-edit">Actualizar</a>
+                </td>
+                <td>
+                    <a href="{% url 'eliminar-lab' laboratorio.pk %}" class="btn btn-delete">Borrar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No se encontraron laboratorios.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+    <div class="alert">
+        ¿Quieres ingresar más laboratorios?
+    </div>
+    <p style="text-align:center">
+        <a href="{% url 'insertar-lab' %}">← Ir a la página de Inicio</a>
+    </p>
+</body>
+</html>
